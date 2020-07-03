@@ -10,6 +10,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController password = TextEditingController();
   final TextEditingController repass = TextEditingController();
   final TextEditingController email = TextEditingController();
+  final TextEditingController otp = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +80,51 @@ class _SignUpPageState extends State<SignUpPage> {
                     color: Colors.blue,
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('homepage');
+                        showDialog(
+                            context: context,
+                            child: SimpleDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              title: Text("Enter your OTP"),
+                              children: <Widget>[
+                                TextField(
+                                  controller: otp,
+                                  maxLength: 6,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      labelText: "Your OTP",
+                                      labelStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey,
+                                      )),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    SimpleDialogOption(
+                                      child: Text(
+                                        "Submit",
+                                        style:
+                                            TextStyle(color: Colors.lightBlue),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamed('homepage');
+                                      },
+                                    ),
+                                    SimpleDialogOption(
+                                      child: Text(
+                                        "Resend",
+                                        style:
+                                            TextStyle(color: Colors.lightBlue),
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ));
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),

@@ -32,7 +32,7 @@ class _FeedPageState extends State<FeedPage> {
               groupAlignment: -1.0,
               destinations: [
                 NavigationRailDestination(
-                  icon: Text("Feed"),
+                  icon: Icon(Icons.whatshot),
                   selectedIcon: Icon(Icons.whatshot),
                   label: Text('Feed'),
                 ),
@@ -45,6 +45,11 @@ class _FeedPageState extends State<FeedPage> {
                   icon: Align(child: Icon(Icons.account_circle)),
                   selectedIcon: Icon(Icons.account_circle),
                   label: Text('Profile'),
+                ),
+                NavigationRailDestination(
+                  icon: Align(child: Icon(Icons.settings)),
+                  selectedIcon: Icon(Icons.settings),
+                  label: Text('Settings'),
                 ),
               ],
             ),
@@ -62,7 +67,9 @@ class _FeedPageState extends State<FeedPage> {
                             ? Container(
                                 color: Colors.red,
                               )
-                            : UserProfile()))
+                            : _selectedIndex == 2
+                                ? UserProfile()
+                                : Container()))
           ],
         ),
       ),
