@@ -1,3 +1,4 @@
+import 'package:ebmc/screens/feedpage.dart';
 import 'package:ebmc/screens/hompage.dart';
 import 'package:flutter/material.dart';
 import 'screens/signup.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'homepage': (context) => HomePage(),
         'signup': (context) => SignUpPage(),
+        'feedpage': (context) => FeedPage(),
       },
       debugShowCheckedModeBanner: false,
       home: HomePage(),

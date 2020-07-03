@@ -126,6 +126,7 @@ class _HomePageState extends State<HomePage> {
                                 ? ispass = true
                                 : ispass = false;
                           });
+                          Navigator.of(context).pushNamed('feedpage');
                         },
                         child: Center(
                           child: Text(
