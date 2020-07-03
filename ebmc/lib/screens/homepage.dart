@@ -16,9 +16,9 @@ class _FeedPageState extends State<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Row(
+    return Scaffold(
+      body: SafeArea(
+        child: Row(
           children: <Widget>[
             NavigationRail(
               selectedIndex: _selectedIndex,

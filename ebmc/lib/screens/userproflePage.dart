@@ -23,6 +23,17 @@ class UserProfile extends StatelessWidget {
             ],
           ),
         ),
+        RaisedButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          color: Colors.lightBlue,
+          child: Text(
+            "Follow",
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {},
+        ),
         Expanded(
           flex: 2,
           child: Container(
@@ -35,7 +46,7 @@ class UserProfile extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,6 +59,9 @@ class UserProfile extends StatelessWidget {
                         Expanded(child: Text("Matlabai Bhayena ni")),
                       ],
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -59,8 +73,11 @@ class UserProfile extends StatelessWidget {
                         Expanded(child: Text("matlabai@bhayenani.com")),
                       ],
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
                           Icons.all_out,
@@ -70,7 +87,8 @@ class UserProfile extends StatelessWidget {
                         Expanded(
                           child: Text.rich(
                             TextSpan(
-                                text: "Bio ma lekheko ta matlabai bhayena ni"),
+                                text:
+                                    "Bio napadhesi ta !  Bio ma lekheko ta matlabai bhayena ni"),
                             textAlign: TextAlign.center,
                           ),
                         ),
