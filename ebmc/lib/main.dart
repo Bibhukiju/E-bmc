@@ -1,6 +1,6 @@
-import 'package:ebmc/screens/feedpage.dart';
 import 'package:ebmc/screens/loginpage.dart';
 import 'package:flutter/material.dart';
+import 'screens/homepage.dart';
 import 'screens/signup.dart';
 
 void main() => runApp(MyApp());

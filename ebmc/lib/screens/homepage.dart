@@ -1,3 +1,4 @@
+import 'package:ebmc/screens/userproflePage.dart';
 import 'package:flutter/material.dart';
 import './newsfeedpage.dart';
 
@@ -54,17 +55,14 @@ class _FeedPageState extends State<FeedPage> {
             ),
             // This is the main content.
             Expanded(
-              child: Center(
-                  child: _selectedIndex == 0
-                      ? NewsFeedPage()
-                      : _selectedIndex == 1
-                          ? Container(
-                              color: Colors.red,
-                            )
-                          : Container(
-                              color: Colors.amber,
-                            )),
-            )
+                child: Center(
+                    child: _selectedIndex == 0
+                        ? NewsFeedPage()
+                        : _selectedIndex == 1
+                            ? Container(
+                                color: Colors.red,
+                              )
+                            : UserProfile()))
           ],
         ),
       ),
