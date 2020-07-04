@@ -83,6 +83,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         showDialog(
                             context: context,
                             child: SimpleDialog(
+                              contentPadding: EdgeInsets.all(20),
+                              titlePadding: EdgeInsets.all(20),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               title: Text("Enter your OTP"),
@@ -109,8 +111,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                             TextStyle(color: Colors.lightBlue),
                                       ),
                                       onPressed: () {
+                                        Navigator.pop(context);
                                         Navigator.of(context)
-                                            .pushNamed('homepage');
+                                            .pushNamed('loginpage');
                                       },
                                     ),
                                     SimpleDialogOption(

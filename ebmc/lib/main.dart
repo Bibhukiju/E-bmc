@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'signup': (context) => SignUpPage(),
         'feedpage': (context) => FeedPage(),
+        'loginpage': (context) => HomePage(),
       },
       debugShowCheckedModeBanner: false,
       home: HomePage(),
