@@ -11,6 +11,20 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController repass = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController otp = TextEditingController();
+
+  TextField buildText({String labelTxt, TextEditingController textEdtCntrl}) {
+    return TextField(
+      controller: textEdtCntrl,
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          labelText: labelTxt,
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,49 +43,10 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: <Widget>[
-                TextField(
-                  controller: username,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Username",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
-                TextField(
-                  controller: email,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Email",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
-                TextField(
-                  obscureText: true,
-                  controller: password,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
-                TextField(
-                  obscureText: true,
-                  controller: repass,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Password",
-                      hintText: "Retype your password",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
+                buildText(labelTxt: "Username", textEdtCntrl: username),
+                buildText(labelTxt: "Email", textEdtCntrl: email),
+                buildText(labelTxt: "Password", textEdtCntrl: password),
+                buildText(labelTxt: "Confirm Password", textEdtCntrl: repass),
                 Align(
                   alignment: Alignment(1, 0),
                   child: Card(
@@ -129,9 +104,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               ],
                             ));
                       },
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Create account"),
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text("Create account"),
+                        ),
                       ),
                     ),
                   ),
