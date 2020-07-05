@@ -12,12 +12,14 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController otp = TextEditingController();
 
-  TextField buildText({String labelTxt, TextEditingController textEdtCntrl}) {
+  TextField buildText(
+      {String labelTxt, TextEditingController textEdtCntrl, String hintTxt}) {
     return TextField(
       controller: textEdtCntrl,
       decoration: InputDecoration(
           border: InputBorder.none,
           labelText: labelTxt,
+          hintText: hintTxt,
           labelStyle: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.grey,
@@ -43,10 +45,22 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: <Widget>[
-                buildText(labelTxt: "Username", textEdtCntrl: username),
-                buildText(labelTxt: "Email", textEdtCntrl: email),
-                buildText(labelTxt: "Password", textEdtCntrl: password),
-                buildText(labelTxt: "Confirm Password", textEdtCntrl: repass),
+                buildText(
+                    labelTxt: "Username",
+                    textEdtCntrl: username,
+                    hintTxt: "Enter Your Username"),
+                buildText(
+                    labelTxt: "Email",
+                    textEdtCntrl: email,
+                    hintTxt: "Enter Your Email"),
+                buildText(
+                    labelTxt: "Password",
+                    textEdtCntrl: password,
+                    hintTxt: "Enter Your Password"),
+                buildText(
+                    labelTxt: "Confirm Password",
+                    textEdtCntrl: email,
+                    hintTxt: "Re-Enter Your Password To Confirm"),
                 Align(
                   alignment: Alignment(1, 0),
                   child: Card(
