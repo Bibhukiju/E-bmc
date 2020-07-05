@@ -11,6 +11,22 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController repass = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController otp = TextEditingController();
+
+  TextField buildText(
+      {String labelTxt, TextEditingController textEdtCntrl, String hintTxt}) {
+    return TextField(
+      controller: textEdtCntrl,
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          labelText: labelTxt,
+          hintText: hintTxt,
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,49 +45,22 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: <Widget>[
-                TextField(
-                  controller: username,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Username",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
-                TextField(
-                  controller: email,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Email",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
-                TextField(
-                  obscureText: true,
-                  controller: password,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
-                TextField(
-                  obscureText: true,
-                  controller: repass,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Password",
-                      hintText: "Retype your password",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      )),
-                ),
+                buildText(
+                    labelTxt: "Username",
+                    textEdtCntrl: username,
+                    hintTxt: "Enter Your Username"),
+                buildText(
+                    labelTxt: "Email",
+                    textEdtCntrl: email,
+                    hintTxt: "Enter Your Email"),
+                buildText(
+                    labelTxt: "Password",
+                    textEdtCntrl: password,
+                    hintTxt: "Enter Your Password"),
+                buildText(
+                    labelTxt: "Confirm Password",
+                    textEdtCntrl: email,
+                    hintTxt: "Re-Enter Your Password To Confirm"),
                 Align(
                   alignment: Alignment(1, 0),
                   child: Card(
@@ -129,9 +118,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               ],
                             ));
                       },
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Create account"),
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text("Create account"),
+                        ),
                       ),
                     ),
                   ),

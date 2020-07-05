@@ -141,26 +141,28 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('New to e-bmc??'),
-              SizedBox(
-                width: 5,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed('signup');
-                },
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('New to e-bmc??'),
+                SizedBox(
+                  width: 5,
                 ),
-              )
-            ],
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('signup');
+                  },
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.underline),
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),
