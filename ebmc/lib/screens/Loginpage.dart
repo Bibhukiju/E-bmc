@@ -15,9 +15,7 @@ class _HomePageState extends State<HomePage> {
     bool isEmail = true;
     bool ispass = true;
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: <Widget>[
           Container(
             child: Stack(
@@ -141,6 +139,9 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               )),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
