@@ -19,16 +19,16 @@ class _SignUpPageState extends State<SignUpPage> {
   signUp(String username, String email, String firstPassword,
       String secondPassword) async {
     Map data = {
-      // 'name': username,
+      'name': username,
       'email': email,
       'first-password': firstPassword,
       'second-password': secondPassword,
     };
-    print('\n' + email + '\n ' + firstPassword + '\n' + secondPassword);
+    print(username + email + firstPassword + secondPassword);
     var jsonResponse;
     var response =
-        await http.post('https://ebmc.herokuapp.com/register', body: data);
-    if (response.statusCode == 201) {
+        await http.post('https://ebmc.herokuapp.com/validate', body: data);
+    if(response.statusCode > 200 && response.statusCode < 300){
       jsonResponse = jsonDecode(response.body);
       if (jsonResponse != null) {
         setState(() {
@@ -36,6 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       }
     } else {
+      print(username + email + firstPassword + secondPassword);
       print(response.body);
       print('hello');
     }
@@ -77,76 +78,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintTxt: "Re-Enter Your Password To Confirm"),
                 Align(
                   alignment: Alignment(1, 0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    color: Colors.blue,
-                    child: InkWell(
-                      onTap: () {
-                        // showDialog(
-                        //     context: context,
-                        //     child: SimpleDialog(
-                        //       contentPadding: EdgeInsets.all(20),
-                        //       titlePadding: EdgeInsets.all(20),
-                        //       shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(10)),
-                        //       title: Text("Enter your OTP"),
-                        //       children: <Widget>[
-                        //         TextField(
-                        //           controller: otp,
-                        //           maxLength: 6,
-                        //           decoration: InputDecoration(
-                        //               border: InputBorder.none,
-                        //               labelText: "Your OTP",
-                        //               labelStyle: TextStyle(
-                        //                 fontWeight: FontWeight.bold,
-                        //                 color: Colors.grey,
-                        //               )),
-                        //         ),
-                        //         Row(
-                        //           mainAxisAlignment:
-                        //               MainAxisAlignment.spaceEvenly,
-                        //           children: <Widget>[
-                        //             SimpleDialogOption(
-                        //               child: Text(
-                        //                 "Submit",
-                        //                 style:
-                        //                     TextStyle(color: Colors.lightBlue),
-                        //               ),
-                        //               onPressed: () {
-                        //                 Navigator.pop(context);
-                        //                 Navigator.of(context)
-                        //                     .pushNamed('homepage');
-                        //               },
-                        //             ),
-                        //             SimpleDialogOption(
-                        //               child: Text(
-                        //                 "Resend",
-                        //                 style:
-                        //                     TextStyle(color: Colors.lightBlue),
-                        //               ),
-                        //               onPressed: () {},
-                        //             ),
-                        //           ],
-                        //         )
-                        //       ],
-                        //     ));
-                        signUp(username.text, email.text, password.text,
-                            repass.text);
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => HomePage()),
-                            (Route<dynamic> route) => false);
-                      },
-                      child: Center(
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text("Create account"),
-                        ),
+                  child:  RaisedButton(
+                      color: Colors.lightBlue,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      onPressed: (){
+                        signUp(username.text, email.text,password.text, repass.text);
+                        },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text("Create account"),
                       ),
                     ),
                   ),
-                )
+
               ],
             ),
           ),
