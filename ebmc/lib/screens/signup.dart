@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:ebmc/screens/homepage.dart';
+
 import './Loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -36,9 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       jsonResponse = jsonDecode(response.body);
       if (jsonResponse != null) {
-        setState(() {
-          _isLoading = false;
-        });
+        print(jsonResponse);
       }
     } else {
       print(response.body);
@@ -87,15 +87,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onPressed: () {
-                      print(username.text +
-                          email.text +
-                          password.text +
-                          repass.text);
                       signUp(
                           username: username.text,
                           email: email.text,
                           firstPassword: password.text,
                           secondPassword: repass.text);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => FeedPage()),
+                          (route) => false);
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),

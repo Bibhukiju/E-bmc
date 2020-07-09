@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'homepage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,8 +13,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool hidden = true;
+  SharedPreferences sharedPreferences;
   final passkey = TextEditingController();
   final email = TextEditingController();
+  login({String email, String password}) async {
+    var jsonData;
+    Map data = {'email': email, 'password': password};
+    var response = await http.post('https://ebmc.herokuapp.com/login/',
+        headers: <String, String>{
+          'Content-type': 'application/json;charset=UTF-8',
+        },
+        body: jsonEncode(data));
+    print(response);
+    print(data);
+    if (response.statusCode == 200) {
+      print("h");
+      jsonData = jsonDecode(response.body);
+      print(jsonData);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => FeedPage()),
+          (Route<dynamic> route) => false);
+    } else {
+      print("bye");
+      print(response.body);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,34 +138,22 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 40,
                   ),
-                  Container(
-                    height: 40.0,
-                    width: 100,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(20),
-                      shadowColor: Colors.blueAccent,
-                      color: Colors.blue,
-                      elevation: 5.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            passkey.text.length < 8
-                                ? ispass = true
-                                : ispass = false;
-                          });
-                          Navigator.of(context).pushNamed('feedpage');
-                        },
-                        child: Center(
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
+                  RaisedButton(
+                    color: Colors.lightBlue,
+                    onPressed: () => {
+                      login(email: email.text, password: passkey.text),
+                      setState(() {
+                        passkey.text.length < 8
+                            ? ispass = true
+                            : ispass = false;
+                      }),
+                    },
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w700),
                     ),
-                  )
+                  ),
                 ],
               )),
           SizedBox(
