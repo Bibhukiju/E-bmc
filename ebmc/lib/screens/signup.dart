@@ -16,19 +16,24 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController otp = TextEditingController();
   bool _isLoading = false;
 
-  signUp(String username, String email, String firstPassword,
-      String secondPassword) async {
+  signUp(
+      {String username,
+      String email,
+      String firstPassword,
+      String secondPassword}) async {
     Map data = {
       'name': username,
       'email': email,
       'first-password': firstPassword,
       'second-password': secondPassword,
     };
-    print(username + email + firstPassword + secondPassword);
     var jsonResponse;
-    var response =
-        await http.post('https://ebmc.herokuapp.com/validate', body: data);
-    if(response.statusCode > 200 && response.statusCode < 300){
+    var response = await http.post('https://ebmc.herokuapp.com/register/',
+        headers: <String, String>{
+          'Content-type': 'application/json;charset=UTF-8',
+        },
+        body: jsonEncode(data));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       jsonResponse = jsonDecode(response.body);
       if (jsonResponse != null) {
         setState(() {
@@ -36,7 +41,6 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       }
     } else {
-      print(username + email + firstPassword + secondPassword);
       print(response.body);
       print('hello');
     }
@@ -78,19 +82,27 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintTxt: "Re-Enter Your Password To Confirm"),
                 Align(
                   alignment: Alignment(1, 0),
-                  child:  RaisedButton(
-                      color: Colors.lightBlue,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      onPressed: (){
-                        signUp(username.text, email.text,password.text, repass.text);
-                        },
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Create account"),
-                      ),
+                  child: RaisedButton(
+                    color: Colors.lightBlue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () {
+                      print(username.text +
+                          email.text +
+                          password.text +
+                          repass.text);
+                      signUp(
+                          username: username.text,
+                          email: email.text,
+                          firstPassword: password.text,
+                          secondPassword: repass.text);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text("Create account"),
                     ),
                   ),
-
+                ),
               ],
             ),
           ),
