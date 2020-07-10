@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'homepage.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +14,10 @@ class _HomePageState extends State<HomePage> {
   SharedPreferences sharedPreferences;
   final passkey = TextEditingController();
   final email = TextEditingController();
+  var a;
   login({String email, String password}) async {
     var jsonData;
+
     Map data = {'email': email, 'password': password};
     var response = await http.post('https://ebmc.herokuapp.com/login/',
         headers: <String, String>{
@@ -29,14 +29,19 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       print("h");
       jsonData = jsonDecode(response.body);
-      print(jsonData);
+
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => FeedPage()),
           (Route<dynamic> route) => false);
+      setState(() {
+        a = jsonData['token'];
+      });
+      print(a.runtimeType);
     } else {
       print("bye");
       print(response.body);
     }
+    print(a);
   }
 
   @override
