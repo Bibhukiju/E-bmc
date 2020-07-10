@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'package:ebmc/screens/homepage.dart';
-
-import './Loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,6 +15,12 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController otp = TextEditingController();
   bool _isLoading = false;
+  bool emailValid(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    return (!regex.hasMatch(value)) ? false : true;
+  }
 
   signUp(
       {String username,
@@ -29,6 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
       'first-password': firstPassword,
       'second-password': secondPassword,
     };
+
     var jsonResponse;
     var response = await http.post('https://ebmc.herokuapp.com/register/',
         headers: <String, String>{
@@ -87,14 +92,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onPressed: () {
-                      signUp(
-                          username: username.text,
-                          email: email.text,
-                          firstPassword: password.text,
-                          secondPassword: repass.text);
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => FeedPage()),
-                          (route) => false);
+                      if (emailValid(email.text) && password.text.length >= 8) {
+                        signUp(
+                            username: username.text,
+                            email: email.text,
+                            firstPassword: password.text,
+                            secondPassword: repass.text);
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => FeedPage()),
+                            (route) => false);
+                      }
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),

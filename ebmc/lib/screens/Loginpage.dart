@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'homepage.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool hidden = true;
-  SharedPreferences sharedPreferences;
+
   final passkey = TextEditingController();
   final email = TextEditingController();
   var a;
