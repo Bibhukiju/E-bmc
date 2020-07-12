@@ -59,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintTxt: "Enter Your Password"),
                 buildText(
                     labelTxt: "Confirm Password",
-                    textEdtCntrl: email,
+                    textEdtCntrl: repass,
                     hintTxt: "Re-Enter Your Password To Confirm"),
                 Align(
                   alignment: Alignment(1, 0),

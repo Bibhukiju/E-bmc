@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                     height: 40.0,
                     width: 100,
                     child: Material(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(40),
                       shadowColor: Colors.blueAccent,
                       color: Colors.blue,
                       elevation: 5.0,

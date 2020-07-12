@@ -1,6 +1,7 @@
 import 'package:ebmc/screens/userproflePage.dart';
 import 'package:flutter/material.dart';
 import './newsfeedpage.dart';
+import 'userpost.dart';
 
 class FeedPage extends StatefulWidget {
   FeedPage({Key key, this.title}) : super(key: key);
@@ -64,9 +65,7 @@ class _FeedPageState extends State<FeedPage> {
                     child: _selectedIndex == 0
                         ? NewsFeedPage()
                         : _selectedIndex == 1
-                            ? Container(
-                                color: Colors.red,
-                              )
+                            ? UserPostPage()
                             : _selectedIndex == 2
                                 ? UserProfile()
                                 : Container()))
